@@ -38,7 +38,19 @@
 </script>
 <h1>Superchat</h1>
 <article id="txtMeldingar"></article>
-<-- Lim inn koden frå Firebase her -->
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD-HliuZbV5SPFePHY6TTQWXk0t6B3V0Bo",
+    authDomain: "chat-1cf26.firebaseapp.com",
+    databaseURL: "https://chat-1cf26.firebaseio.com",
+    projectId: "chat-1cf26",
+    storageBucket: "chat-1cf26.appspot.com",
+    messagingSenderId: "415305621780"
+  };
+  firebase.initializeApp(config);
+</script>
 <script>
     let txtMeldingar = document.getElementById("txtMeldingar");
     let database = firebase.database();
