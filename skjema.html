@@ -1,0 +1,44 @@
+<body>
+    <form id="skjema">
+        <input type="text" id="inpSendar" required placeholder="Kven er du?">
+        <input type="text" id="inpMeining" required placeholder="Kva seier du?">
+        <button type="submit"
+            class="button">OK</button> 
+    </form>
+    <article id="txtMeldingar"></article>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js">
+    </script>
+    <script>
+  // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD-HliuZbV5SPFePHY6TTQWXk0t6B3V0Bo",
+        authDomain: "chat-1cf26.firebaseapp.com",
+        databaseURL: "https://chat-1cf26.firebaseio.com",
+        projectId: "chat-1cf26",
+        storageBucket: "chat-1cf26.appspot.com",
+            messagingSenderId: "415305621780"
+        };
+        firebase.initializeApp(config);
+    </script>
+    
+    <script>
+        let database = firebase.database();
+        let meldingar = database.ref("meldingar"); let skjema = document. getElementById("skjema");
+        let inpSendar = document. getElementById("inpSendar");
+        let inpMeining = document. getElementById("inpMeining"); let txtMeldingar = document. getElementById("txtMeldingar"); function visMelding(snapshot) {
+            let melding = snapshot.val(); let meldingTekst = `<p>
+        <b>${melding.sendar}: </b>
+        <i>${melding.tekst}</i> </p>`;
+            txtMeldingar.innerHTML = txtMeldingar.
+            innerHTML + meldingTekst;
+        }
+        function regNyMelding(evt) {
+            evt.preventDefault(); var nyMelding = {
+                sendar: inpSendar.value,
+                tekst: inpMeining.value };
+            meldingar.push(nyMelding);
+            inpMeining.value = " ";
+        }
+        meldingar.on("child_added", visMelding);
+        skjema.onsubmit = regNyMelding; </script>
+</body>
